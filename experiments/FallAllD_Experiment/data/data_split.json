@@ -1,0 +1,20 @@
+{
+  "train_size": 1760,
+  "val_size": 377,
+  "test_size": 378,
+  "train_percentage": 69.98011928429423,
+  "val_percentage": 14.990059642147116,
+  "test_percentage": 15.029821073558647,
+  "train_class_dist": [
+    1461,
+    299
+  ],
+  "val_class_dist": [
+    313,
+    64
+  ],
+  "test_class_dist": [
+    314,
+    64
+  ]
+}

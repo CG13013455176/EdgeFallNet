@@ -1,0 +1,47 @@
+Model: "EdgeFallNet"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_layer (InputLayer)       [(None, 300, 6)]     0           []                               
+                                                                                                  
+ initial_conv (SeparableConv1D)  (None, 300, 8)      86          ['input_layer[0][0]']            
+                                                                                                  
+ pool1 (MaxPooling1D)           (None, 60, 8)        0           ['initial_conv[0][0]']           
+                                                                                                  
+ squeeze_fire1 (Conv1D)         (None, 60, 4)        36          ['pool1[0][0]']                  
+                                                                                                  
+ expand1x1_fire1 (Conv1D)       (None, 60, 2)        10          ['squeeze_fire1[0][0]']          
+                                                                                                  
+ expand3x3_fire1 (SeparableConv  (None, 60, 6)       42          ['squeeze_fire1[0][0]']          
+ 1D)                                                                                              
+                                                                                                  
+ merge_fire1 (Concatenate)      (None, 60, 8)        0           ['expand1x1_fire1[0][0]',        
+                                                                  'expand3x3_fire1[0][0]']        
+                                                                                                  
+ pool2 (MaxPooling1D)           (None, 12, 8)        0           ['merge_fire1[0][0]']            
+                                                                                                  
+ squeeze_fire2 (Conv1D)         (None, 12, 4)        36          ['pool2[0][0]']                  
+                                                                                                  
+ expand1x1_fire2 (Conv1D)       (None, 12, 2)        10          ['squeeze_fire2[0][0]']          
+                                                                                                  
+ expand3x3_fire2 (SeparableConv  (None, 12, 6)       42          ['squeeze_fire2[0][0]']          
+ 1D)                                                                                              
+                                                                                                  
+ merge_fire2 (Concatenate)      (None, 12, 8)        0           ['expand1x1_fire2[0][0]',        
+                                                                  'expand3x3_fire2[0][0]']        
+                                                                                                  
+ pool3 (MaxPooling1D)           (None, 3, 8)         0           ['merge_fire2[0][0]']            
+                                                                                                  
+ flatten (Flatten)              (None, 24)           0           ['pool3[0][0]']                  
+                                                                                                  
+ dense1 (Dense)                 (None, 8)            200         ['flatten[0][0]']                
+                                                                                                  
+ dropout (Dropout)              (None, 8)            0           ['dense1[0][0]']                 
+                                                                                                  
+ output (Dense)                 (None, 1)            9           ['dropout[0][0]']                
+                                                                                                  
+==================================================================================================
+Total params: 471
+Trainable params: 471
+Non-trainable params: 0
+__________________________________________________________________________________________________

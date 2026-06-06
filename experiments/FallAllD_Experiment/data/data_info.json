@@ -1,0 +1,13 @@
+{
+  "original_shape": "<class 'list'>",
+  "num_samples": 2515,
+  "input_shape": [
+    4760,
+    6
+  ],
+  "num_classes": 1,
+  "class_distribution": [
+    2088,
+    427
+  ]
+}

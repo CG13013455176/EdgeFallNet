@@ -1,0 +1,59 @@
+
+experiment:
+  name: "FallAllD_Experiment"
+  description: "使用FallAllD数据集训练的SqueezeNet模型"
+  author: "Your Name"
+  timestamp: "auto"  # 会自动替换为实际时间
+
+dataset:
+  name: "FallAllD"
+  data_path: "F:/PycharmProjects/project1/EdgeFallNet/datasets/FallAllD/FallAllD_Data.pkl"
+  label_path: "F:/PycharmProjects/project1/EdgeFallNet/datasets/FallAllD/FallAllD_lable.pkl"
+  input_shape: [4760, 6]
+  num_classes: 1
+  test_size: 0.3
+  val_size: 0.5
+  random_state: 42
+  shuffle: true
+  stratify: true
+  reshape: false  # FallAllD数据不需要reshape
+
+model:
+  name: "EdgeFallNet_FallAllD"
+  architecture: "EdgeFallNet"
+  initial_conv_filters: 16
+  fire1_squeeze: 8
+  fire1_expand1x1: 4
+  fire1_expand3x3: 6
+  fire2_squeeze: 8
+  fire2_expand1x1: 4
+  fire2_expand3x3: 6
+  dense_units: 8
+  dropout_rate: 0.1
+  use_separable: true
+  num_classes: 1
+
+training:
+  batch_size: 32
+  epochs: 120
+  learning_rate: 0.05
+  optimizer: "adamax"
+  loss: "binary_crossentropy"
+  metrics: ["accuracy"]
+  use_early_stopping: true
+  early_stopping_patience: 20
+  use_reduce_lr: true
+  reduce_lr_patience: 10
+  reduce_lr_factor: 0.5
+  min_lr: 0.000001
+
+logging:
+  use_tensorboard: false
+  log_dir: "logs"
+  model_save_dir: "saved_models"
+  experiment_dir: "experiments"
+  save_format: "h5"  # 可以是h5, tf, 或tflite
+  save_best_only: true
+  monitor_metric: "val_loss"
+  monitor_mode: "min"
+  verbose: 1

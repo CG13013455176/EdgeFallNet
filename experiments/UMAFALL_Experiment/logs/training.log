@@ -1,0 +1,87 @@
+2025-12-22 14:51:25,990 - FallDetection - INFO - ============================================================
+2025-12-22 14:51:25,991 - FallDetection - INFO - 实验名称: UMAFALL_Experiment
+2025-12-22 14:51:25,991 - FallDetection - INFO - 实验描述: 使用UMAFALL数据集训练的SqueezeNet模型
+2025-12-22 14:51:25,991 - FallDetection - INFO - 数据集: UMAFALL
+2025-12-22 14:51:25,991 - FallDetection - INFO - 模型: EdgeFallNet_UMAFALL
+2025-12-22 14:51:25,991 - FallDetection - INFO - 时间戳: 20251222_145125
+2025-12-22 14:51:25,991 - FallDetection - INFO - ============================================================
+2025-12-22 14:51:25,991 - FallDetection - INFO - 开始加载数据...
+2025-12-22 14:51:26,020 - FallDetection - INFO - 数据reshape为: (725, 300, 6)
+2025-12-22 14:51:26,020 - FallDetection - INFO - 数据形状: (725, 300, 6)
+2025-12-22 14:51:26,020 - FallDetection - INFO - 标签形状: (725,)
+2025-12-22 14:51:26,021 - FallDetection - INFO - 类别分布: [518 207]
+2025-12-22 14:51:26,022 - FallDetection - INFO - 开始划分数据集...
+2025-12-22 14:51:26,026 - FallDetection - INFO - 训练集: (507, 300, 6) (69.9%)
+2025-12-22 14:51:26,026 - FallDetection - INFO - 验证集: (109, 300, 6) (15.0%)
+2025-12-22 14:51:26,026 - FallDetection - INFO - 测试集: (109, 300, 6) (15.0%)
+2025-12-22 14:51:26,027 - FallDetection - INFO - 开始构建模型...
+2025-12-22 14:51:26,257 - FallDetection - WARNING - 无法保存模型结构图: You must install pydot (`pip install pydot`) and install graphviz (see instructions at https://graphviz.gitlab.io/download/) for plot_model to work.
+2025-12-22 14:51:26,257 - FallDetection - INFO - 模型构建完成
+2025-12-22 14:51:26,257 - FallDetection - INFO - 
+Model: "EdgeFallNet"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_layer (InputLayer)       [(None, 300, 6)]     0           []                               
+                                                                                                  
+ initial_conv (SeparableConv1D)  (None, 300, 8)      86          ['input_layer[0][0]']            
+                                                                                                  
+ pool1 (MaxPooling1D)           (None, 60, 8)        0           ['initial_conv[0][0]']           
+                                                                                                  
+ squeeze_fire1 (Conv1D)         (None, 60, 4)        36          ['pool1[0][0]']                  
+                                                                                                  
+ expand1x1_fire1 (Conv1D)       (None, 60, 2)        10          ['squeeze_fire1[0][0]']          
+                                                                                                  
+ expand3x3_fire1 (SeparableConv  (None, 60, 6)       42          ['squeeze_fire1[0][0]']          
+ 1D)                                                                                              
+                                                                                                  
+ merge_fire1 (Concatenate)      (None, 60, 8)        0           ['expand1x1_fire1[0][0]',        
+                                                                  'expand3x3_fire1[0][0]']        
+                                                                                                  
+ pool2 (MaxPooling1D)           (None, 12, 8)        0           ['merge_fire1[0][0]']            
+                                                                                                  
+ squeeze_fire2 (Conv1D)         (None, 12, 4)        36          ['pool2[0][0]']                  
+                                                                                                  
+ expand1x1_fire2 (Conv1D)       (None, 12, 2)        10          ['squeeze_fire2[0][0]']          
+                                                                                                  
+ expand3x3_fire2 (SeparableConv  (None, 12, 6)       42          ['squeeze_fire2[0][0]']          
+ 1D)                                                                                              
+                                                                                                  
+ merge_fire2 (Concatenate)      (None, 12, 8)        0           ['expand1x1_fire2[0][0]',        
+                                                                  'expand3x3_fire2[0][0]']        
+                                                                                                  
+ pool3 (MaxPooling1D)           (None, 3, 8)         0           ['merge_fire2[0][0]']            
+                                                                                                  
+ flatten (Flatten)              (None, 24)           0           ['pool3[0][0]']                  
+                                                                                                  
+ dense1 (Dense)                 (None, 8)            200         ['flatten[0][0]']                
+                                                                                                  
+ dropout (Dropout)              (None, 8)            0           ['dense1[0][0]']                 
+                                                                                                  
+ output (Dense)                 (None, 1)            9           ['dropout[0][0]']                
+                                                                                                  
+==================================================================================================
+Total params: 471
+Trainable params: 471
+Non-trainable params: 0
+__________________________________________________________________________________________________
+2025-12-22 14:51:26,262 - FallDetection - INFO - 开始训练模型...
+2025-12-22 14:51:26,262 - FallDetection - INFO - 训练样本数: 507
+2025-12-22 14:51:26,262 - FallDetection - INFO - 验证样本数: 109
+2025-12-22 14:51:26,262 - FallDetection - INFO - 测试样本数: 109
+2025-12-22 14:51:37,150 - FallDetection - INFO - 训练图表已保存到: experiments\UMAFALL_Experiment_20251222_145125\figures\training_history.png
+2025-12-22 14:51:37,210 - FallDetection - INFO - 模型已保存到: experiments\UMAFALL_Experiment_20251222_145125\models
+2025-12-22 14:51:37,210 - FallDetection - INFO - 开始评估模型...
+2025-12-22 14:51:37,530 - FallDetection - INFO - ============================================================
+2025-12-22 14:51:37,530 - FallDetection - INFO - 模型评估结果
+2025-12-22 14:51:37,530 - FallDetection - INFO - ============================================================
+2025-12-22 14:51:37,530 - FallDetection - INFO - 测试集损失: 0.0560
+2025-12-22 14:51:37,530 - FallDetection - INFO - 测试集准确率: 0.9817
+2025-12-22 14:51:37,530 - FallDetection - INFO - 准确率: 0.9817
+2025-12-22 14:51:37,530 - FallDetection - INFO - 灵敏度: 0.9677
+2025-12-22 14:51:37,530 - FallDetection - INFO - 特异度: 0.9872
+2025-12-22 14:51:37,530 - FallDetection - INFO - 几何均值: 0.9774
+2025-12-22 14:51:37,530 - FallDetection - INFO - ============================================================
+2025-12-22 14:51:37,530 - FallDetection - INFO - 训练完成!
+2025-12-22 14:51:37,530 - FallDetection - INFO - 实验结果保存在: experiments\UMAFALL_Experiment_20251222_145125
+2025-12-22 14:51:37,532 - FallDetection - INFO - ============================================================

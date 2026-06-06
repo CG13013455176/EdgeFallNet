@@ -1,0 +1,58 @@
+dataset:
+  data_path: F:/PycharmProjects/project1/EdgeFallNet/datasets/UMAFALL/UMAFALL_Data.pkl
+  input_shape:
+  - 300
+  - 6
+  label_path: F:/PycharmProjects/project1/EdgeFallNet/datasets/UMAFALL/UMAFALL_lable.pkl
+  name: UMAFALL
+  num_classes: 1
+  random_state: 42
+  reshape: true
+  shuffle: true
+  stratify: true
+  test_size: 0.3
+  val_size: 0.5
+experiment:
+  author: Your Name
+  description: "\u4F7F\u7528UMAFALL\u6570\u636E\u96C6\u8BAD\u7EC3\u7684SqueezeNet\u6A21\
+    \u578B"
+  name: UMAFALL_Experiment
+  timestamp: '20251222_145125'
+logging:
+  experiment_dir: experiments
+  log_dir: logs
+  model_save_dir: saved_models
+  monitor_metric: val_loss
+  monitor_mode: min
+  save_best_only: true
+  save_format: h5
+  use_tensorboard: false
+  verbose: 1
+model:
+  architecture: EdgeFallNet
+  dense_units: 8
+  dropout_rate: 0.1
+  fire1_expand1x1: 2
+  fire1_expand3x3: 6
+  fire1_squeeze: 4
+  fire2_expand1x1: 2
+  fire2_expand3x3: 6
+  fire2_squeeze: 4
+  initial_conv_filters: 8
+  name: EdgeFallNet_UMAFALL
+  num_classes: 1
+  use_separable: true
+training:
+  batch_size: 32
+  early_stopping_patience: 20
+  epochs: 120
+  learning_rate: 0.01
+  loss: binary_crossentropy
+  metrics:
+  - accuracy
+  min_lr: 1.0e-06
+  optimizer: adamax
+  reduce_lr_factor: 0.5
+  reduce_lr_patience: 10
+  use_early_stopping: true
+  use_reduce_lr: true
